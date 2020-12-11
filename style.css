@@ -33,6 +33,9 @@ video {
     height: 100%;
     width: auto;   
 }
+video:focus {
+    outline: none;
+}
 
 #blur {
     position: fixed;
@@ -63,6 +66,10 @@ video {
     text-align: right;
     margin-right: 0;
     margin-left: auto;
+}
+.video .info .date {
+    color: gray;
+    font-weight: bold;
 }
 
 .video .info .div {
