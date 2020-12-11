@@ -37,6 +37,22 @@ video:focus {
     outline: none;
 }
 
+.video-container .play-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: white;
+    font-size: 70px;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
 #blur {
     position: fixed;
     top: 0px;
