@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TikTok API Test</title>
+</head>
+<body>
+    <video id="vid" type="video/mp4" controls></video>
+    <p id="description"></p>
+    <p id="author-name"></p>
+    <img id="author-pic" /><br>
+    <p id="sound-name"></p>
+    <img id="sound-pic" />
+    <br><br>
+    <input id="video-url" placeholder="Video URL..." />
+    <button onclick="loadvideo()">Load</button>
+
+    <script>
+        let video = document.getElementById("vid");
+        let desc  = document.getElementById("description");
+        let auth  = document.getElementById("author-name");
+        let pfp   = document.getElementById("author-pic");
+        let sound = document.getElementById("sound-name");
+        let sPic  = document.getElementById("sound-pic");
+
+        let urlIn = document.getElementById("video-url");
+
+        function loadvideo() {
+            let vidUrl = urlIn.value.trim();
+            if(vidUrl.length <= 0) {
+                return;
+            }
+            fetch("https://tiktok.p.rapidapi.com/live/post/meta/v2?video=" + encodeURIComponent(vidUrl), {
+                method: "GET",
+                headers: {
+                    "x-rapidapi-key": "17b0f43234mshafa02d6e2b0addfp1ef942jsn2a6f7ed96b9e",
+                    "x-rapidapi-host": "tiktok.p.rapidapi.com",
+                    "useQueryString": true
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                video.src = data.videoUrlNoWaterMark;
+                desc.innerText = data.text;
+                auth.innerText = `@${data.authorMeta.unique_id}`;
+                pfp.src = data.authorMeta.avatar;
+                sound.innerText = data.musicMeta.musicName;
+                sPic.src = data.musicMeta.coverThumb;
+            });
+        }
+    </script>
+</body>
+</html>
